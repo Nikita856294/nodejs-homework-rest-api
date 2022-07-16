@@ -2,7 +2,7 @@
 
 const fs = require("fs/promises");
 const contactsPath = require("./contactsPath");
-const updateContacts = require("./updateContactsById");
+const updateContacts = require("./updateContacts");
 
 const listContacts = async () => {
   const contacts = await fs.readFile(contactsPath, "utf-8");
@@ -28,7 +28,7 @@ const removeContact = async (id) => {
   return contacts[idx];
 };
 
-const addContact = async (name, email, phone) => {
+const addContact = async ({ name, email, phone }) => {
   const contacts = await listContacts();
   const lastContact = contacts.length - 1;
 
@@ -51,7 +51,7 @@ const updateContact = async (contactId, { name, email, phone }) => {
   }
 
   contacts[idx] = { id: contactId, name, email, phone };
-  updateContacts(contacts);
+  await updateContacts(contacts);
   return contacts[idx];
 };
 
