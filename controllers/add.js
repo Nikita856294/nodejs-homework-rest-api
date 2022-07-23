@@ -1,19 +1,15 @@
-const contactsMethods = require("../models/contacts");
-const createError = require("../helpers");
-const validationScheme = require("../schema/contactsSchemes");
+const { createError } = require("../helpers");
+const { addScheme } = require("../models/contactsModel");
+const { addContact } = require("../services");
 
 const create = async (req, res, next) => {
-  const { name, email, phone } = req.body;
-  const { error } = validationScheme.validate(req.body);
+  const { error } = addScheme.validate(req.body);
   if (error) {
     throw createError(400, error.message);
   }
-  const newContact = await contactsMethods.addContact({
-    name,
-    email,
-    phone,
-  });
-  res.status(201).json(newContact);
+  const result = await addContact(req.body);
+
+  res.status(201).json({ result });
 };
 
 module.exports = create;

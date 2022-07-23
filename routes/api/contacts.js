@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const ctrlWrapper = require("../../wrapper/ctrlWrapper");
+const { ctrlWrapper } = require("../../helpers");
 const contactsCtrl = require("../../controllers");
 
 router.get("/", ctrlWrapper(contactsCtrl.getAll));
@@ -13,4 +13,5 @@ router.delete("/:contactId", ctrlWrapper(contactsCtrl.removeById));
 
 router.put("/:contactId", ctrlWrapper(contactsCtrl.updateById));
 
+router.patch("/:contactId", ctrlWrapper(contactsCtrl.updateFavoriteById));
 module.exports = router;

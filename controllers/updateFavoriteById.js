@@ -1,13 +1,13 @@
 const { createError } = require("../helpers");
-const { addScheme } = require("../models/contactsModel");
+const { updateSchemeFavorite } = require("../models/contactsModel");
 const { updateStatusContact } = require("../services");
 
-const updateById = async (req, res, next) => {
+const updateFavoriteById = async (req, res, next) => {
   const { contactId } = req.params;
   const { body } = req;
-  const { error } = addScheme.validate(body);
+  const { error } = updateSchemeFavorite.validate(body);
   if (error) {
-    throw createError(400, "missing fields");
+    throw createError(400, "missing fields favorite");
   }
 
   const result = await updateStatusContact(contactId, body);
@@ -17,4 +17,4 @@ const updateById = async (req, res, next) => {
   res.status(200).json({ result });
 };
 
-module.exports = updateById;
+module.exports = updateFavoriteById;
