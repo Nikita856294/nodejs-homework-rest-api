@@ -9,7 +9,7 @@ const create = async (req, res, next) => {
   }
   const result = await addContact(req.body);
 
-  res.status(201).json({ result });
+  res.status(201).json({ status: "success", code: 201, result });
 };
 
 module.exports = create;

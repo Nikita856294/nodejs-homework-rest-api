@@ -14,7 +14,7 @@ const updateFavoriteById = async (req, res, next) => {
   if (!result) {
     throw createError(404);
   }
-  res.status(200).json({ result });
+  res.status(200).json({ status: "success", code: 200, result });
 };
 
 module.exports = updateFavoriteById;
