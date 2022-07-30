@@ -1,13 +1,14 @@
-const contactsMethods = require("../models/contacts");
-const createError = require("../helpers");
+const { createError } = require("../helpers");
+const { getContactById } = require("../services");
 
 const getById = async (req, res, next) => {
   const { contactId } = req.params;
-  const contact = await contactsMethods.getContactById(contactId);
-  if (!contact) {
+
+  const result = await getContactById(contactId);
+  if (!result) {
     throw createError(404);
   }
-  res.status(200).json(contact);
+  res.status(200).json({ status: "success", code: 200, result });
 };
 
 module.exports = getById;
