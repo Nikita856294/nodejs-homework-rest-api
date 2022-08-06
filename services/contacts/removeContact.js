@@ -1,4 +1,4 @@
-const { Contact } = require("../models/contactsModel");
+const { Contact } = require("../../models/contactsModel");
 
 const removeContact = async (contactId) => {
   const result = await Contact.findByIdAndRemove(contactId);
