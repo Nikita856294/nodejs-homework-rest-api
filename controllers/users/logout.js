@@ -3,7 +3,6 @@ const { updateToken, findByIdUser } = require("../../services/users");
 
 const logout = async (req, res) => {
   const { _id } = req.user;
-  console.log(_id);
   const user = await findByIdUser(_id);
   if (!user) {
     throw createError(401);
