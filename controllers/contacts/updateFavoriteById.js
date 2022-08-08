@@ -1,6 +1,6 @@
-const { createError } = require("../helpers");
-const { updateSchemeFavorite } = require("../models/contactsModel");
-const { updateStatusContact } = require("../services");
+const { createError } = require("../../helpers");
+const { updateSchemeFavorite } = require("../../models/contactsModel");
+const { updateStatusContact } = require("../../services/contacts");
 
 const updateFavoriteById = async (req, res, next) => {
   const { contactId } = req.params;

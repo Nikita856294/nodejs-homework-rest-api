@@ -1,5 +1,5 @@
-const { createError } = require("../helpers");
-const { getContactById } = require("../services");
+const { createError } = require("../../helpers");
+const { getContactById } = require("../../services/contacts");
 
 const getById = async (req, res, next) => {
   const { contactId } = req.params;
