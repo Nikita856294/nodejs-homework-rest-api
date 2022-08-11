@@ -1,3 +1,4 @@
 const auth = require("./auth");
-require("jsonwebtoken");
-module.exports = auth;
+const upload = require("./upload");
+
+module.exports = { auth, upload };
