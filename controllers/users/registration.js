@@ -15,7 +15,9 @@ const registration = async (req, res) => {
   }
   const salt = bcryptjs.genSaltSync(10);
   const hashPassword = bcryptjs.hashSync(password, salt);
+
   const result = await registrationUser(email, hashPassword);
+
   res.status(201).json({
     message: "Success",
     code: 201,
