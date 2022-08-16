@@ -5,6 +5,7 @@ const getCurrent = require("./getCurrent");
 const updateSubscriptionById = require("./updateSubscriptionById");
 const updateAvatar = require("./updateAvatar");
 const verification = require("./verification");
+const reverification = require("./reverification");
 
 module.exports = {
   registration,
@@ -14,4 +15,5 @@ module.exports = {
   updateSubscriptionById,
   updateAvatar,
   verification,
+  reverification,
 };
