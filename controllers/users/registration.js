@@ -2,6 +2,8 @@ const { userRegistrationSchema } = require("../../models/usersModel");
 const { createError } = require("../../helpers");
 const bcryptjs = require("bcryptjs");
 const { findByEmailUser, registrationUser } = require("../../services/users");
+const { v4 } = require("uuid");
+const { sendMail } = require("../../helpers");
 
 const registration = async (req, res) => {
   const { email, password } = req.body;
@@ -15,8 +17,16 @@ const registration = async (req, res) => {
   }
   const salt = bcryptjs.genSaltSync(10);
   const hashPassword = bcryptjs.hashSync(password, salt);
+  const verificationToken = v4();
+  console.log(verificationToken);
+  const result = await registrationUser(email, hashPassword, verificationToken);
+  const mail = {
+    to: email,
+    subject: "Подтверждение почты",
+    html: `<a target="_blank" href="http://localhost:5000/api/users/verify/${verificationToken}">Нажмите для подтвержения почты</a>`,
+  };
 
-  const result = await registrationUser(email, hashPassword);
+  await sendMail(mail);
 
   res.status(201).json({
     message: "Success",
@@ -25,6 +35,7 @@ const registration = async (req, res) => {
       user: {
         email: result.email,
         subscription: result.subscription,
+        verificationToken,
       },
     },
   });
